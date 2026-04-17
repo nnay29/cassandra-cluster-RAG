@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   cassandra1:
     image: cassandra:5.0.6
@@ -28,7 +26,7 @@ services:
       - "9043:9042"   # different host port
       - "7001:7000"
     environment:
-      - CASSANDRA_CLUSTER_NAME=demo_cluster
+      - CASSANDRA_CLUSTER_NAME=sucess_cluster
       - CASSANDRA_DC=DC1
       - CASSANDRA_RACK=RACK1
       - CASSANDRA_SEEDS=cassandra1,cassandra2
