@@ -7,6 +7,7 @@ services:
     ports:
       - "9042:9042"
       - "7199:7199"
+      - "7000:7000" # for node-to-node gossip traffic
     environment:
       - CASSANDRA_CLUSTER_NAME=success_cluster
       - CASSANDRA_DC=DC1
