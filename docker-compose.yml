@@ -20,28 +20,28 @@ services:
     volumes:
       - cassandra1_data:/var/lib/cassandra
 
-  cassandra2:
-    image: cassandra:5.0.6
-    container_name: cassandra2
-    hostname: cassandra2
-    restart: unless-stopped
-    ports:
-      - "9043:9042"
-      - "7001:7000"
-    environment:
-      - CASSANDRA_CLUSTER_NAME=success_cluster
-      - CASSANDRA_DC=DC1
-      - CASSANDRA_RACK=RACK1
-      - CASSANDRA_SEEDS=cassandra1
-      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_LISTEN_ADDRESS=0.0.0.0
-      - CASSANDRA_BROADCAST_ADDRESS=0.0.0.0
-      - CASSANDRA_RPC_ADDRESS=0.0.0.0
-      - CASSANDRA_JVM_OPTS=-Xms1G -Xmx2G
-    volumes:
-      - cassandra2_data:/var/lib/cassandra
-    depends_on:
-      - cassandra1
+  # cassandra2:
+  #   image: cassandra:5.0.6
+  #   container_name: cassandra2
+  #   hostname: cassandra2
+  #   restart: unless-stopped
+  #   ports:
+  #     - "9043:9042"
+  #     - "7001:7000"
+  #   environment:
+  #     - CASSANDRA_CLUSTER_NAME=success_cluster
+  #     - CASSANDRA_DC=DC1
+  #     - CASSANDRA_RACK=RACK1
+  #     - CASSANDRA_SEEDS=cassandra1
+  #     - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+  #     - CASSANDRA_LISTEN_ADDRESS=0.0.0.0
+  #     - CASSANDRA_BROADCAST_ADDRESS=0.0.0.0
+  #     - CASSANDRA_RPC_ADDRESS=0.0.0.0
+  #     - CASSANDRA_JVM_OPTS=-Xms1G -Xmx2G
+  #   volumes:
+  #     - cassandra2_data:/var/lib/cassandra
+  #   depends_on:
+  #     - cassandra1
 
 volumes:
   cassandra1_data:
