@@ -5,19 +5,28 @@ services:
     hostname: cassandra1
     restart: unless-stopped
     ports:
-      - "9042:9042"
-      - "7199:7199"
-      - "7000:7000" # for node-to-node gossip traffic
+      - "9042:9042"   # CQL - for your RAG app
+      - "7199:7199"   # JMX - for nodetool
+      - "7000:7000"   # Gossip - node to node traffic
     environment:
-      - CASSANDRA_CLUSTER_NAME=success_cluster
-      - CASSANDRA_DC=DC1
-      - CASSANDRA_RACK=RACK1
-      - CASSANDRA_SEEDS=cassandra1
+      - CASSANDRA_CLUSTER_NAME=${CASSANDRA_CLUSTER_NAME}
+      - CASSANDRA_DC=${CASSANDRA_DC}
+      - CASSANDRA_RACK=${CASSANDRA_RACK}
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      # Removed the 0.0.0.0 addresses - let Cassandra auto-detect
-      - CASSANDRA_RPC_ADDRESS=0.0.0.0 # This one is actually okay for client connections
-      - MAX_HEAP_SIZE=1G
-      - HEAP_NEWSIZE=256M
+      
+      # Network settings - using variables from .env
+      - CASSANDRA_LISTEN_ADDRESS=auto
+      - CASSANDRA_BROADCAST_ADDRESS=${DOCKER_HOST_IP}
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=${DOCKER_HOST_IP}
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      
+      # Seeds - both nodes (very important)
+      - CASSANDRA_SEEDS=${WSL_HOST_IP},${DOCKER_HOST_IP}
+      
+      # Memory settings
+      - MAX_HEAP_SIZE=${MAX_HEAP_SIZE}
+      - HEAP_NEWSIZE=${HEAP_NEWSIZE}
+
     volumes:
       - cassandra1_data:/var/lib/cassandra
     healthcheck:
