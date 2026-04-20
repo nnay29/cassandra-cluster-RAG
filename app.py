@@ -71,6 +71,13 @@ with st.sidebar:
                 vector_store.add_documents(chunks)
             st.success(f"Ingested {len(chunks)} chunks successfully!")
 
+    # Clear database button at bottom of sidebar
+    if st.button("🗑️ Clear All Knowledge", type="primary", use_container_width=True):
+        if rag_tools:
+            vector_store, _ = rag_tools
+            vector_store.session.execute("TRUNCATE rag_vector_table")
+            st.success("Database wiped clean!")
+
 # --- CHAT ---
 if rag_tools:
     vector_store, llm = rag_tools
