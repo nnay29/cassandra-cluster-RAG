@@ -5,7 +5,9 @@ from cassandra.cluster import Cluster
 from cassandra.io.asyncioreactor import AsyncioConnection
 from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_community.vectorstores import Cassandra
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import CharacterTextSplitter
+import tempfile
 
 load_dotenv()
 
@@ -52,13 +54,19 @@ with st.sidebar:
     else:
         st.error("Cluster Offline")
 
-    uploaded_file = st.file_uploader("Upload a text file for the AI", type=["txt"])
+    uploaded_file = st.file_uploader("Upload a file for the AI", type=["txt", "pdf"])
     if uploaded_file and st.button("Ingest to Cluster"):
         if rag_tools:
             vector_store, _ = rag_tools
-            raw_text = uploaded_file.read().decode("utf-8")
-            text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-            chunks = text_splitter.create_documents([raw_text])
+            if uploaded_file.type == "application/pdf":
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
+                    tmp.write(uploaded_file.getvalue())
+                    tmp_path = tmp.name
+                chunks = PyPDFLoader(tmp_path).load_and_split()
+            else:
+                raw_text = uploaded_file.read().decode("utf-8")
+                text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+                chunks = text_splitter.create_documents([raw_text])
             with st.spinner("Replicating data across nodes..."):
                 vector_store.add_documents(chunks)
             st.success(f"Ingested {len(chunks)} chunks successfully!")
@@ -83,6 +91,9 @@ if rag_tools:
             with st.status("Searching Cassandra Nodes...", expanded=False):
                 results = vector_store.similarity_search(prompt, k=3)
                 context = "\n".join([d.page_content for d in results])
+                pages = [d.metadata.get("page") for d in results if "page" in d.metadata]
+                if pages:
+                    st.caption(f"📄 Sources — pages: {pages}")
 
             full_prompt = (
                 f"Context:\n{context}\n\nQuestion: {prompt}\n"
