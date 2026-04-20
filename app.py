@@ -31,7 +31,7 @@ def init_rag():
     embeddings = OllamaEmbeddings(
         model="nomic-embed-text:v1.5", base_url=OLLAMA_BASE_URL
     )
-    llm = ChatOllama(model="gemma3:12b", base_url=OLLAMA_BASE_URL)
+    llm = ChatOllama(model="granite3.2:2b", base_url=OLLAMA_BASE_URL)
 
     vector_store = Cassandra(
         embedding=embeddings,

@@ -12,7 +12,7 @@ CASSANDRA_IP = os.getenv("DOCKER_HOST_IP")
 OLLAMA_BASE_URL = f"http://{os.getenv('OLLAMA_HOST', '127.0.0.1')}:11434"
 CASSANDRA_KEYSPACE = "rag_demo"
 EMBEDDING_MODEL = "nomic-embed-text:v1.5"
-LLM_MODEL = "gemma3:12b"
+LLM_MODEL = "granite3.2:2b"
 
 
 class RAGManager:
