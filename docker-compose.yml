@@ -2,40 +2,37 @@ services:
   cassandra1:
     image: cassandra:5.0.6
     container_name: cassandra1
-    hostname: cassandra1
-    restart: unless-stopped
-    #network_mode: "host"
     ports:
-      - "9042:9042"   # CQL - for your RAG app
-      - "7199:7199"   # JMX - for nodetool
-      - "7000:7000"   # Gossip - node to node traffic
-      - "7001:7001"   # Gossip - node to node traffic
+      - "9042:9042"
     environment:
-      - CASSANDRA_CLUSTER_NAME=${CASSANDRA_CLUSTER_NAME}
-      - CASSANDRA_DC=${CASSANDRA_DC}
-      - CASSANDRA_RACK=${CASSANDRA_RACK}
+      - CASSANDRA_CLUSTER_NAME=rag_cluster
+      - CASSANDRA_DC=dc1
+      - CASSANDRA_RACK=rack1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      
-      # Network settings - using variables from .env
-      - CASSANDRA_LISTEN_ADDRESS=127.0.0.1
-      - CASSANDRA_BROADCAST_ADDRESS=${DOCKER_HOST_IP}
-      - CASSANDRA_BROADCAST_RPC_ADDRESS=${DOCKER_HOST_IP}
-      - CASSANDRA_RPC_ADDRESS=0.0.0.0
-      
-      # Seeds - both nodes (very important)
-      - CASSANDRA_SEEDS=${WSL_HOST_IP},${DOCKER_HOST_IP}
-      
-      # Memory settings
-      - MAX_HEAP_SIZE=${MAX_HEAP_SIZE}
-      - HEAP_NEWSIZE=${HEAP_NEWSIZE}
-
+      - CASSANDRA_SEEDS=cassandra1 
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=128M
     volumes:
       - cassandra1_data:/var/lib/cassandra
-    healthcheck:
-      test: ["CMD-SHELL", "nodetool status"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+
+  cassandra2:
+    image: cassandra:5.0.6
+    container_name: cassandra2
+    depends_on:
+      - cassandra1
+    ports:
+      - "9043:9042" 
+    environment:
+      - CASSANDRA_CLUSTER_NAME=rag_cluster
+      - CASSANDRA_DC=dc1
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_SEEDS=cassandra1 
+      - MAX_HEAP_SIZE=512M
+      - HEAP_NEWSIZE=128M
+    volumes:
+      - cassandra2_data:/var/lib/cassandra
 
 volumes:
   cassandra1_data:
+  cassandra2_data:
