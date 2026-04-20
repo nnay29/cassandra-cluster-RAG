@@ -1,0 +1,95 @@
+import os
+from dotenv import load_dotenv
+import streamlit as st
+from cassandra.cluster import Cluster
+from cassandra.io.asyncioreactor import AsyncioConnection
+from langchain_ollama import OllamaEmbeddings, ChatOllama
+from langchain_community.vectorstores import Cassandra
+from langchain_text_splitters import CharacterTextSplitter
+
+load_dotenv()
+
+DOCKER_HOST_IP = os.getenv("DOCKER_HOST_IP")
+OLLAMA_BASE_URL = f"http://{os.getenv('OLLAMA_HOST', '127.0.0.1')}:11434"
+CASSANDRA_KEYSPACE = "rag_demo"
+
+st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
+st.title("🚀 Success Cluster: RAG High Availability Demo")
+
+
+@st.cache_resource
+def init_rag():
+    try:
+        cluster = Cluster(
+            [DOCKER_HOST_IP], port=9042, connection_class=AsyncioConnection
+        )
+        session = cluster.connect(CASSANDRA_KEYSPACE)
+    except Exception as e:
+        st.error(f"❌ Could not connect to Cassandra at {DOCKER_HOST_IP}: {e}")
+        return None
+
+    embeddings = OllamaEmbeddings(
+        model="nomic-embed-text:v1.5", base_url=OLLAMA_BASE_URL
+    )
+    llm = ChatOllama(model="gemma3:12b", base_url=OLLAMA_BASE_URL)
+
+    vector_store = Cassandra(
+        embedding=embeddings,
+        session=session,
+        keyspace=CASSANDRA_KEYSPACE,
+        table_name="rag_vector_table",
+    )
+    return vector_store, llm
+
+
+rag_tools = init_rag()
+
+# --- SIDEBAR ---
+with st.sidebar:
+    st.header("Settings & Ingestion")
+    if rag_tools:
+        st.success(f"Connected to Cluster at {DOCKER_HOST_IP}")
+    else:
+        st.error("Cluster Offline")
+
+    uploaded_file = st.file_uploader("Upload a text file for the AI", type=["txt"])
+    if uploaded_file and st.button("Ingest to Cluster"):
+        if rag_tools:
+            vector_store, _ = rag_tools
+            raw_text = uploaded_file.read().decode("utf-8")
+            text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+            chunks = text_splitter.create_documents([raw_text])
+            with st.spinner("Replicating data across nodes..."):
+                vector_store.add_documents(chunks)
+            st.success(f"Ingested {len(chunks)} chunks successfully!")
+
+# --- CHAT ---
+if rag_tools:
+    vector_store, llm = rag_tools
+
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    if prompt := st.chat_input("Ask a question about your documents..."):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            with st.status("Searching Cassandra Nodes...", expanded=False):
+                results = vector_store.similarity_search(prompt, k=3)
+                context = "\n".join([d.page_content for d in results])
+
+            full_prompt = (
+                f"Context:\n{context}\n\nQuestion: {prompt}\n"
+                "Answer strictly based on context."
+            )
+            response = llm.invoke(full_prompt)
+            st.markdown(response.content)
+            st.session_state.messages.append(
+                {"role": "assistant", "content": response.content}
+            )
