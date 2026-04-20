@@ -10,4 +10,6 @@ dependencies = [
     "langchain-ollama>=1.1.0",
     "langchain-text-splitters>=1.1.2",
     "ollama>=0.6.1",
+    "streamlit>=1.56.0",
+    "watchdog>=6.0.0",
 ]
