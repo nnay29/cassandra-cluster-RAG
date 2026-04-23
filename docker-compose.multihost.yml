@@ -1,0 +1,44 @@
+# compose file for a node in an eventual two host setup
+# a setup where we build a cluster within one host and another within another host on a seperate computer. 
+
+services:
+  cassandra1:
+    image: cassandra:5.0.6
+    container_name: cassandra1
+    hostname: cassandra1
+    restart: unless-stopped
+    #network_mode: "host"
+    ports:
+      - "9042:9042"   # CQL - for your RAG app
+      - "7199:7199"   # JMX - for nodetool
+      - "7000:7000"   # Gossip - node to node traffic
+      - "7001:7001"   # Gossip - node to node traffic
+    environment:
+      - CASSANDRA_CLUSTER_NAME=${CASSANDRA_CLUSTER_NAME}
+      - CASSANDRA_DC=${CASSANDRA_DC}
+      - CASSANDRA_RACK=${CASSANDRA_RACK}
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      
+      # Network settings - using variables from .env
+      - CASSANDRA_LISTEN_ADDRESS=127.0.0.1
+      - CASSANDRA_BROADCAST_ADDRESS=${DOCKER_HOST_IP}
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=${DOCKER_HOST_IP}
+      - CASSANDRA_RPC_ADDRESS=0.0.0.0
+      
+      # Seeds - both nodes (very important)
+      - CASSANDRA_SEEDS=${WSL_HOST_IP},${DOCKER_HOST_IP}
+      
+      # Memory settings
+      - MAX_HEAP_SIZE=${MAX_HEAP_SIZE}
+      - HEAP_NEWSIZE=${HEAP_NEWSIZE}
+
+    volumes:
+      - cassandra1_data:/var/lib/cassandra
+    healthcheck:
+      test: ["CMD-SHELL", "nodetool status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  cassandra1_data:

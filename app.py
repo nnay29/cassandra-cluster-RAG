@@ -16,7 +16,7 @@ OLLAMA_BASE_URL = f"http://{os.getenv('OLLAMA_HOST', '127.0.0.1')}:11434"
 CASSANDRA_KEYSPACE = "rag_demo"
 
 st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
-st.title("🚀 Success Cluster: RAG High Availability Demo")
+st.title("Démonstration du TALLA RAG")
 
 
 @st.cache_resource
