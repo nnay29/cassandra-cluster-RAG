@@ -11,3 +11,7 @@ wheels/
 
 
 .env
+
+BLANK_README.md
+test_rag.py
+demo.txt
