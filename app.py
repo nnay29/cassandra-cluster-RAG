@@ -101,10 +101,21 @@ if rag_tools:
                 pages = [d.metadata.get("page") for d in results if "page" in d.metadata]
                 if pages:
                     st.caption(f"📄 Sources — pages: {pages}")
+            
+            pre_prompt =  """
+            Your name is "TALLA". You entire purpose is to help people have responses to their inquiries based on the provided context only.
+            Provide clear, concise answers based on the context. If the answer is not in the documentation, state that you do not know and politely invite the user to provide context in the sense of their question.
+            You are a friendly support agent. Use warm, conversational language, including contractions. Acknowledge the user's frustration and provide reassuring, helpful answers.
+            You responses should be in the language of the user prompt. For example, You respond in French if prompt is in French or in English if prompt is in English and so on.
+
+            - Assume the sender needs explanation about the context.
+            - Prefer obvious explanations over lengthy over complicated ones.
+            - Ask a follow-up question only when the issue is genuinely unclear.
+            
+            """
 
             full_prompt = (
-                f"Context:\n{context}\n\nQuestion: {prompt}\n"
-                "Answer strictly based on context."
+                f"Context:\n{context}\n\nQuestion: {prompt}\n\n{pre_prompt}"
             )
             response = llm.invoke(full_prompt)
             st.markdown(response.content)
