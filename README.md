@@ -81,11 +81,12 @@
 
 ### Prerequisites
 
-- [Docker](https://www.docker.com/) & Docker Compose
-- [Ollama](https://ollama.com/) running locally with the following models pulled:
+- [Docker](https://www.docker.com/desktop/) & Docker Compose
+- [Ollama](https://ollama.com/download) running locally with the following models pulled:
   ```sh
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
+  ollama pull <your_model_name>
   ```
 - [Python 3.11](https://www.python.org) or higher
 - [uv](https://docs.astral.sh/uv/) (Python package manager) 
@@ -160,7 +161,7 @@ Project Link: [https://github.com/nnay29/cassandra-cluster-RAG](https://github.c
 ## Acknowledgments
 
 * []()
-* []()
+* [Working on uv projects](https://docs.astral.sh/uv/guides/projects/)
 * [Taximan Talla officiel](https://web.facebook.com/profile.php?id=61555192163930)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
