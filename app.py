@@ -14,6 +14,7 @@ load_dotenv()
 DOCKER_HOST_IP = os.getenv("DOCKER_HOST_IP")
 OLLAMA_BASE_URL = f"http://{os.getenv('OLLAMA_HOST', '127.0.0.1')}:11434"
 CASSANDRA_KEYSPACE = "rag_demo"
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "granite3.2:2b") #Set OLLAMA_MODEL from environment or default to "granite3.2:2b"
 
 st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
 st.title("Démonstration du TALLA RAG")
