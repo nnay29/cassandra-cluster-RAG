@@ -28,13 +28,14 @@ def init_rag():
         )
         session = cluster.connect(CASSANDRA_KEYSPACE)
     except Exception as e:
-        st.error(f"❌ Could not connect to Cassandra at {DOCKER_HOST_IP}: {e}")
+        st.error(f" Could not connect to Cassandra at {DOCKER_HOST_IP}: {e}")
         return None
 
     embeddings = OllamaEmbeddings(
         model="nomic-embed-text:v1.5", base_url=OLLAMA_BASE_URL
     )
-    llm = ChatOllama(model="granite3.2:2b", base_url=OLLAMA_BASE_URL)
+    # llm = ChatOllama(model="granite3.2:2b", base_url=OLLAMA_BASE_URL)
+    llm = ChatOllama(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL)
 
     vector_store = Cassandra(
         embedding=embeddings,
