@@ -50,6 +50,11 @@
 [![Streamlit][Streamlit-badge]][Streamlit-url]
 [![Docker][Docker-badge]][Docker-url]
 [![Ollama][Ollama-badge]][Ollama-url]
+[![Python][Python-badge]][Python-url]
+[![UV][UV-badge]][UV-url]
+
+
+
 
 [Ollama-badge]: https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white
 [Ollama-url]: https://ollama.com
@@ -62,6 +67,14 @@
 
 [Cassandra-badge]: https://img.shields.io/badge/Cassandra-1287B1?style=for-the-badge&logo=apache-cassandra&logoColor=white
 [Cassandra-url]: https://cassandra.apache.org/
+
+
+[Python-badge]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+
+[UV-badge]: https://img.shields.io/badge/UV-3A0CA3?style=for-the-badge&logo=python&logoColor=white
+[UV-url]: https://github.com/astral-sh/uv
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -86,8 +99,9 @@
   ```sh
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
-  ollama pull <your_model_name>
+  ollama pull <your_model_name> # in case you prefer another ollama model
   ```
+  I recommend to [check your hardware's capabilities to run opensource LLMs](https://medium.com/@smrati.katiyar/check-your-hardwares-capabilities-to-run-opensource-llms-44dc70694468)
 - [Python 3.11](https://www.python.org) or higher
 - [uv](https://docs.astral.sh/uv/) (Python package manager) 
     ```sh
@@ -163,6 +177,10 @@ Project Link: [https://github.com/nnay29/cassandra-cluster-RAG](https://github.c
 * []()
 * [Working on uv projects](https://docs.astral.sh/uv/guides/projects/)
 * [Taximan Talla officiel](https://web.facebook.com/profile.php?id=61555192163930)
+* [Top G](https://gemini.google.com/app)
+* [Into the Unknown](https://chat.deepseek.com/)
+* [It’s a human thing. You wouldn’t understand.](https://grok.com/)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
