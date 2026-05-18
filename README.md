@@ -2,7 +2,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center" id="#readme-top">
   <a href="https://github.com/nnay29/cassandra-cluster-RAG">
     <img src="images/taximan-talla.png" alt="Logo" width="200px" height="250px">
   </a>
@@ -22,6 +22,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#because-of-why">Because of Why ?</a></li>
     <li><a href="#usage">Usage</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -41,10 +42,10 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+<h2 id="about-the-project">About The Project</h2>
 
 
-### Built With
+<h2 id="built-with">Built with</h2>
 
 [![Cassandra][Cassandra-badge]][Cassandra-url]
 [![Streamlit][Streamlit-badge]][Streamlit-url]
@@ -79,8 +80,12 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<h2 id="because-of-why-">Because of Why ?</h2>
+This project was built as a means to experiment myself with NoSql databases. Building a project that implemented Cassandra helped me understand what actually NoSql databases are meant by and particularly the distributed nature Cassandra is famous for. This project helped me get closer to my high end Engineering aspirations and get in touch with uv for dependency management.
+
 <!-- USAGE EXAMPLES -->
-## Usage
+<h2 id="usage">Usage</h2>
 
 [**TALLA-RAG**](https://github.com/nnay29/cassandra-cluster-RAG) is a local application that lets you chat with your documents using a local LLM backed by a Cassandra cluster for vector storage.
 
@@ -90,9 +95,9 @@
 4. Use **Clear All Knowledge** to wipe the vector store.
 
 <!-- GETTING STARTED -->
-## Getting Started
+<h2 id="getting-started">Getting Started</h2>
 
-### Prerequisites
+<h3 id="prerequisites">Prerequisites</h3>
 
 - [Docker](https://www.docker.com/desktop/) & Docker Compose
 - [Ollama](https://ollama.com/download) running locally with the following models pulled:
@@ -108,7 +113,8 @@
        pip install uv
     ```   
 
-### Installation
+<h3 id="installation">Installation</h3>
+
 1. Clone the repo
    ```sh
    git clone https://github.com/nnay29/cassandra-cluster-RAG.git
@@ -148,7 +154,7 @@
 
 
 <!-- ROADMAP -->
-## Roadmap
+<h2 id="roadmap">Roadmap</h2>
 
 <!-- - [ ] Feature 1
 - [ ] Feature 2
@@ -163,7 +169,7 @@ See the [open issues](https://github.com/nnay29/cassandra-cluster-RAG/issues) fo
 
 
 <!-- CONTACT -->
-## Contact
+<h2 id="contact">Contact</h2>
 
 <!-- Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
 
@@ -172,7 +178,7 @@ Project Link: [https://github.com/nnay29/cassandra-cluster-RAG](https://github.c
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<h2 id="acknowledgments">Acknowledgments</h2>
 
 * []()
 * [Working on uv projects](https://docs.astral.sh/uv/guides/projects/)
