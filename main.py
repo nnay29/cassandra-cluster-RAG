@@ -1,5 +1,5 @@
 def main():
-    print("Hello from cassandra-demo!")
+    print("Hello from TALLA !")
 
 
 if __name__ == "__main__":

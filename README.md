@@ -105,6 +105,7 @@ This project was built as a means to experiment myself with NoSql databases. Bui
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
   ollama pull <your_model_name> # in case you prefer another ollama model
+  ollama pull <your_embedding_model>
   ```
   I recommend to [check your hardware's capabilities to run opensource LLMs](https://medium.com/@smrati.katiyar/check-your-hardwares-capabilities-to-run-opensource-llms-44dc70694468)
 - [Python 3.11](https://www.python.org) or higher

@@ -15,8 +15,9 @@ DOCKER_HOST_IP = os.getenv("DOCKER_HOST_IP")
 OLLAMA_BASE_URL = f"http://{os.getenv('OLLAMA_HOST', '127.0.0.1')}:11434"
 CASSANDRA_KEYSPACE = "rag_demo"
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "granite3.2:2b") #Set OLLAMA_MODEL from environment or default to "granite3.2:2b"
+OLLAMA_EMBEDDING = os.getenv("OLLAMA_EMBEDDING", "nomic-embed-text:v1.5")
 
-st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
+#st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
 st.title("Démonstration du TALLA RAG")
 
 
@@ -28,13 +29,14 @@ def init_rag():
         )
         session = cluster.connect(CASSANDRA_KEYSPACE)
     except Exception as e:
-        st.error(f"❌ Could not connect to Cassandra at {DOCKER_HOST_IP}: {e}")
+        st.error(f" Could not connect to Cassandra at {DOCKER_HOST_IP}: {e}")
         return None
 
     embeddings = OllamaEmbeddings(
-        model="nomic-embed-text:v1.5", base_url=OLLAMA_BASE_URL
+        model=OLLAMA_EMBEDDING, base_url=OLLAMA_BASE_URL
     )
-    llm = ChatOllama(model="granite3.2:2b", base_url=OLLAMA_BASE_URL)
+    # llm = ChatOllama(model="granite3.2:2b", base_url=OLLAMA_BASE_URL)
+    llm = ChatOllama(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL)
 
     vector_store = Cassandra(
         embedding=embeddings,
