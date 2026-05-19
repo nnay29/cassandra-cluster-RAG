@@ -2,7 +2,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+<div align="center" id="#readme-top">
   <a href="https://github.com/nnay29/cassandra-cluster-RAG">
     <img src="images/taximan-talla.png" alt="Logo" width="200px" height="250px">
   </a>
@@ -22,6 +22,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#because-of-why">Because of Why ?</a></li>
     <li><a href="#usage">Usage</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -41,15 +42,20 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+<h2 id="about-the-project">About The Project</h2>
 
 
-### Built With
+<h2 id="built-with">Built with</h2>
 
 [![Cassandra][Cassandra-badge]][Cassandra-url]
 [![Streamlit][Streamlit-badge]][Streamlit-url]
 [![Docker][Docker-badge]][Docker-url]
 [![Ollama][Ollama-badge]][Ollama-url]
+[![Python][Python-badge]][Python-url]
+[![UV][UV-badge]][UV-url]
+
+
+
 
 [Ollama-badge]: https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white
 [Ollama-url]: https://ollama.com
@@ -64,10 +70,22 @@
 [Cassandra-url]: https://cassandra.apache.org/
 
 
+[Python-badge]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+
+[UV-badge]: https://img.shields.io/badge/UV-3A0CA3?style=for-the-badge&logo=python&logoColor=white
+[UV-url]: https://github.com/astral-sh/uv
+
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<h2 id="because-of-why-">Because of Why ?</h2>
+This project was built as a means to experiment myself with NoSql databases. Building a project that implemented Cassandra helped me understand what actually NoSql databases are meant by and particularly the distributed nature Cassandra is famous for. This project helped me get closer to my high end Engineering aspirations and get in touch with uv for dependency management.
+
 <!-- USAGE EXAMPLES -->
-## Usage
+<h2 id="usage">Usage</h2>
 
 [**TALLA-RAG**](https://github.com/nnay29/cassandra-cluster-RAG) is a local application that lets you chat with your documents using a local LLM backed by a Cassandra cluster for vector storage.
 
@@ -77,25 +95,27 @@
 4. Use **Clear All Knowledge** to wipe the vector store.
 
 <!-- GETTING STARTED -->
-## Getting Started
+<h2 id="getting-started">Getting Started</h2>
 
-### Prerequisites
+<h3 id="prerequisites">Prerequisites</h3>
 
 - [Docker](https://www.docker.com/desktop/) & Docker Compose
 - [Ollama](https://ollama.com/download) running locally with the following models pulled:
   ```sh
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
-  ollama pull <your_model_name>
+  ollama pull <your_model_name> # in case you prefer another ollama model
   ollama pull <your_embedding_model>
   ```
+  I recommend to [check your hardware's capabilities to run opensource LLMs](https://medium.com/@smrati.katiyar/check-your-hardwares-capabilities-to-run-opensource-llms-44dc70694468)
 - [Python 3.11](https://www.python.org) or higher
 - [uv](https://docs.astral.sh/uv/) (Python package manager) 
     ```sh
        pip install uv
     ```   
 
-### Installation
+<h3 id="installation">Installation</h3>
+
 1. Clone the repo
    ```sh
    git clone https://github.com/nnay29/cassandra-cluster-RAG.git
@@ -135,7 +155,7 @@
 
 
 <!-- ROADMAP -->
-## Roadmap
+<h2 id="roadmap">Roadmap</h2>
 
 <!-- - [ ] Feature 1
 - [ ] Feature 2
@@ -150,7 +170,7 @@ See the [open issues](https://github.com/nnay29/cassandra-cluster-RAG/issues) fo
 
 
 <!-- CONTACT -->
-## Contact
+<h2 id="contact">Contact</h2>
 
 <!-- Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com -->
 
@@ -159,11 +179,15 @@ Project Link: [https://github.com/nnay29/cassandra-cluster-RAG](https://github.c
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<h2 id="acknowledgments">Acknowledgments</h2>
 
 * []()
 * [Working on uv projects](https://docs.astral.sh/uv/guides/projects/)
 * [Taximan Talla officiel](https://web.facebook.com/profile.php?id=61555192163930)
+* [Top G](https://gemini.google.com/app)
+* [Into the Unknown](https://chat.deepseek.com/)
+* [It’s a human thing. You wouldn’t understand.](https://grok.com/)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
