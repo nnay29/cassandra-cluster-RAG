@@ -87,6 +87,7 @@
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
   ollama pull <your_model_name>
+  ollama pull <your_embedding_model>
   ```
 - [Python 3.11](https://www.python.org) or higher
 - [uv](https://docs.astral.sh/uv/) (Python package manager) 
