@@ -7,6 +7,11 @@ from langchain_ollama import OllamaEmbeddings, ChatOllama
 from langchain_community.vectorstores import Cassandra
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import CharacterTextSplitter
+from datetime import datetime
+import random as rd
+
+
+
 import tempfile
 
 load_dotenv()
@@ -18,7 +23,23 @@ OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "granite3.2:2b") #Set OLLAMA_MODEL from
 OLLAMA_EMBEDDING = os.getenv("OLLAMA_EMBEDDING", "nomic-embed-text:v1.5")
 
 #st.set_page_config(page_title="Yaoundé AI - Success Cluster", layout="wide")
-st.title("Démonstration du TALLA RAG")
+
+now = datetime.now()
+
+salutations = ['Hey there I\'m TALLA! What’s on your mind today?',
+               'Hello! How can TALLA help you today?',
+               'Hi from TALLA! What can I do for you?',
+               'TALLA will be happy to help you out with whatever you\'re working on.',
+               'Let\' get started. What do you need TALLA to analyze?',
+               "TALLA is ready when you are. What is the query?",
+               "Greetings!, I'm TALLA the local rag! What are you looking for ?"
+
+               ]
+
+choosen = rd.choice(salutations)
+st.write(choosen)
+# if now.hour >= 9 and now.hour < 18:
+#     st.title("Démonstration du TALLA RAG")
 
 
 @st.cache_resource

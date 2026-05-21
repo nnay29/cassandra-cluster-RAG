@@ -153,6 +153,28 @@ This project was built as a means to experiment myself with NoSql databases. Bui
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+
+If you experience issues during the setup process or while running the app, please check the following:
+
+
+| Issue Category | Specific Issue | Troubleshooting Solution |
+|----------------|----------------|--------------------------|
+| **Ollama Connection Error** | `ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible.` | - *Check whether ollama is installed and running* - Also check if the model is pulled successfully|
+| **Cluster Offline Error in app UI** | `Cluster Offline` (Cassandra cluster status) | *Wait for the Cassandra containers to finish starting up. Check logs if issue persists* |
+| **From Screenshot 3** | `Could not connect to Cassandra at 10.0.169.121:9042` – timeout error | *Make sure the env variable DOCKER_HOST_IP is set to your machine's local IP adress.* |
+| **Docker Compose Issues** | Docker Compose not working / not installed (Windows) | *Verify that you have Docker Desktop installed.* |
+| **Docker Compose Issues** | Docker Compose not running | *Verify that Docker Compose is running. use docker compose ls command* |
+| **Cassandra Containers Issues** | Cassandra containers not running | *Grab some coffee and wait for them to start up, if nothing happens after a while, check the logs.* |
+| **Cassandra Containers Issues** | Cassandra logs show errors | *Check your Docker Compose logs for any error messages. Praise the lord too. I know what I mean...* |
+| **Streamlit App Issues** | Streamlit app not running | *Verify that the Streamlit app is running. use ```streamlit run app.py``` command* |
+| **Streamlit App Issues** | Streamlit logs show errors | *Check your Streamlit logs for any error messages.* |
+
+Open an [issue](https://github.com/nnay29/cassandra-cluster-RAG/issues) on the GitHub repository if you continue to experience issues. We will try to help you resolve them.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- ROADMAP -->
 <h2 id="roadmap">Roadmap</h2>
