@@ -105,7 +105,7 @@ This project was built as a means to experiment myself with NoSql databases. Bui
   ollama pull nomic-embed-text:v1.5
   ollama pull granite3.2:2b
   ollama pull <your_model_name> # in case you prefer another ollama model
-  ollama pull <your_embedding_model>
+  ollama pull <your_embedding_model> # or another embedding model...
   ```
   I recommend to [check your hardware's capabilities to run opensource LLMs](https://medium.com/@smrati.katiyar/check-your-hardwares-capabilities-to-run-opensource-llms-44dc70694468)
 - [Python 3.11](https://www.python.org) or higher
@@ -125,7 +125,7 @@ This project was built as a means to experiment myself with NoSql databases. Bui
     ```sh
     cp .env.example .env
     ```
-    Edit .env and set _DOCKER_HOST_IP_ to you machine's local IP adress
+   🚨 Edit .env and set _DOCKER_HOST_IP_ to you machine's local IP address.
 
 3. Start the Cassandra cluster
    ```sh
@@ -163,12 +163,13 @@ If you experience issues during the setup process or while running the app, plea
 |----------------|----------------|--------------------------|
 | **Ollama Connection Error** | `ConnectionError: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible.` | - *Check whether ollama is installed and running* - Also check if the model is pulled successfully|
 | **Cluster Offline Error in app UI** | `Cluster Offline` (Cassandra cluster status) | *Wait for the Cassandra containers to finish starting up. Check logs if issue persists* |
-| **From Screenshot 3** | `Could not connect to Cassandra at 10.0.169.121:9042` – timeout error | *Make sure the env variable DOCKER_HOST_IP is set to your machine's local IP adress.* |
+| **Cluster Offline Error in app UI** | `Could not connect to Cassandra at <IP_ADRESS>:9042` – timeout error | *Make sure the env variable **DOCKER_HOST_IP** is set to your machine's local IP adress.* |
+| **Cluster Offline Error in app UI** | `Cluster Offline` + `Could not connect to Cassandra at None: contact_points should not contain None (it can resolve to localhost)` | *Make sure the env variable **DOCKER_HOST_IP** is set to your machine's local IP adress.* |
 | **Docker Compose Issues** | Docker Compose not working / not installed (Windows) | *Verify that you have Docker Desktop installed.* |
 | **Docker Compose Issues** | Docker Compose not running | *Verify that Docker Compose is running. use docker compose ls command* |
 | **Cassandra Containers Issues** | Cassandra containers not running | *Grab some coffee and wait for them to start up, if nothing happens after a while, check the logs.* |
 | **Cassandra Containers Issues** | Cassandra logs show errors | *Check your Docker Compose logs for any error messages. Praise the lord too. I know what I mean...* |
-| **Streamlit App Issues** | Streamlit app not running | *Verify that the Streamlit app is running. use ```streamlit run app.py``` command* |
+| **Streamlit App Issues** | Streamlit app not running | *Verify that you activated the virtual environment and are in the right directory. Then use ```streamlit run app.py``` command* |
 | **Streamlit App Issues** | Streamlit logs show errors | *Check your Streamlit logs for any error messages.* |
 
 Open an [issue](https://github.com/nnay29/cassandra-cluster-RAG/issues) on the GitHub repository if you continue to experience issues. We will try to help you resolve them.
